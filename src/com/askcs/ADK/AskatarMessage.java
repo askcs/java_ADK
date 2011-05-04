@@ -6,6 +6,7 @@ import com.askcs.webservices.ResourceDataResponse;
 
 public class AskatarMessage {
 
+	protected String messageUUID;
 	protected String message;
 	protected String type;
 	

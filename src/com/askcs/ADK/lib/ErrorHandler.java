@@ -8,9 +8,9 @@ public class ErrorHandler {
 	protected SessionHandler sh;
 	protected AskPortType askport;
 	
-	public ErrorHandler() {
+	public ErrorHandler(SessionHandler sh) {
 		// TODO Auto-generated constructor stub
-		sh = new SessionHandler();
+		this.sh=sh;
 		askport = sh.getAskPort();
 	}
 	public ErrorHandler(AskPortType askport) {

@@ -39,9 +39,12 @@ public class PersonalAgentFactory {
 		data.getTuple().add(tuple);
 		StringResponse res=askport.createNode(sh.getSessionId(), uuid, data);
 		if(res.getError()==0){
-			return new PersonalAgent(res.getResult(), name, sh);
+
+			PersonalAgent agent=new PersonalAgent(res.getResult(), name, sh);
+			agent.setTextResource("askatar", "");
+			return agent;
 		} else
-			err.printErrorMessage(res.getError(), "createNode");
+			err.printErrorMessage(res.getError(), "createNode");		
 		
 		return null;
 	}
