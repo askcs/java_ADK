@@ -1,19 +1,15 @@
 package com.askcs.factory;
 
-import java.util.List;
-
 import com.askcs.ADK.PersonalAgent;
 import com.askcs.ADK.lib.ErrorHandler;
 import com.askcs.ADK.lib.Logger;
 import com.askcs.ADK.lib.SessionHandler;
 
-import cs.ask.com.Ask;
-import cs.ask.com.AskPortType;
-import cs.ask.com.StringArrayResponse;
-import cs.ask.com.StringResponse;
-import cs.ask.com.Tuple;
-import cs.ask.com.TupleArray;
-import cs.ask.com.TupleArrayResponse;
+import com.askcs.webservices.AskPortType;
+import com.askcs.webservices.StringResponse;
+import com.askcs.webservices.Tuple;
+import com.askcs.webservices.TupleArray;
+import com.askcs.webservices.TupleArrayResponse;
 
 public class PersonalAgentFactory {
 
@@ -26,8 +22,8 @@ public class PersonalAgentFactory {
 	public PersonalAgentFactory() {
 		// TODO Auto-generated constructor stub
 		sh = new SessionHandler();
-		err = new ErrorHandler(sh.getAskport());
-		askport = sh.getAskport();
+		err = new ErrorHandler(sh.getAskPort());
+		askport = sh.getAskPort();
 	}
 	
 	public PersonalAgent createPersonalAgent(String name){

@@ -1,7 +1,7 @@
 package com.askcs.ADK.lib;
 
-import cs.ask.com.Ask;
-import cs.ask.com.AskPortType;
+import com.askcs.webservices.Ask;
+import com.askcs.webservices.AskPortType;
 
 public class Settings {
 	public static final Ask ask = new Ask();

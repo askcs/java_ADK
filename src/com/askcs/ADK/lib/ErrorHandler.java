@@ -1,8 +1,7 @@
 package com.askcs.ADK.lib;
 
-import cs.ask.com.Ask;
-import cs.ask.com.AskPortType;
-import cs.ask.com.StringResponse;
+import com.askcs.webservices.AskPortType;
+import com.askcs.webservices.StringResponse;
 
 public class ErrorHandler {
 
@@ -12,7 +11,7 @@ public class ErrorHandler {
 	public ErrorHandler() {
 		// TODO Auto-generated constructor stub
 		sh = new SessionHandler();
-		askport = sh.getAskport();
+		askport = sh.getAskPort();
 	}
 	public ErrorHandler(AskPortType askport) {
 		this.askport = askport;
