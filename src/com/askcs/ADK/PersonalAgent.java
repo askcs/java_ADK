@@ -22,9 +22,7 @@ public class PersonalAgent {
 		this.name=name;
 		
 		this.sh=sh;
-		
-		Ask ask = new Ask();
-		askport = ask.getAskPort();
+		askport = sh.getAskport();
 	}
 
 	public String getUuid() {

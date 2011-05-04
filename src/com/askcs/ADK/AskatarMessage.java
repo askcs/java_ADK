@@ -13,9 +13,9 @@ public class AskatarMessage {
 	
 	public AskatarMessage(String uuid, SessionHandler sh){
 		
-		Ask ask = new Ask();
-		AskPortType askport = ask.getAskPort();
-		ResourceDataResponse res = askport.getResourceDataByTag(sh.getSessionId(), uuid, "message", "1");
+		AskPortType askport = sh.getAskport();
+		ResourceDataResponse res = askport.getResourceDataByTag(sh.getSessionId(), uuid, "message", "TXT");
+		
 		if(res.getError()==0){
 			message = res.getResult().getValue();
 		}

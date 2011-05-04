@@ -26,10 +26,8 @@ public class PersonalAgentFactory {
 	public PersonalAgentFactory() {
 		// TODO Auto-generated constructor stub
 		sh = new SessionHandler();
-		err = new ErrorHandler();
-		
-		Ask ask = new Ask();
-		askport = ask.getAskPort();
+		err = new ErrorHandler(sh.getAskport());
+		askport = sh.getAskport();
 	}
 	
 	public PersonalAgent createPersonalAgent(String name){
@@ -39,7 +37,10 @@ public class PersonalAgentFactory {
 	public PersonalAgent createPersonalAgent(String name, String uuid){
 		
 		TupleArray data = new TupleArray();
-		data.getTuple().add(new Tuple("name", name));
+		Tuple tuple = new Tuple();
+		tuple.setName("name");
+		tuple.setValue(name);
+		data.getTuple().add(tuple);
 		StringResponse res=askport.createNode(sh.getSessionId(), uuid, data);
 		if(res.getError()==0){
 			return new PersonalAgent(res.getResult(), name, sh);

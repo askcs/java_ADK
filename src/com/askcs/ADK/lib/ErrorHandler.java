@@ -12,8 +12,10 @@ public class ErrorHandler {
 	public ErrorHandler() {
 		// TODO Auto-generated constructor stub
 		sh = new SessionHandler();
-		Ask ask = new Ask();
-		askport = ask.getAskPort();
+		askport = sh.getAskport();
+	}
+	public ErrorHandler(AskPortType askport) {
+		this.askport = askport;
 	}
 
 	public void printErrorMessage(int errorId, String functionName){

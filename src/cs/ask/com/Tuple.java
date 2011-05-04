@@ -32,17 +32,7 @@ import javax.xml.bind.annotation.XmlType;
 
 })
 public class Tuple {
-	
-	public Tuple(){
-		this.name="";
-		this.value="";
-	}
 
-	public Tuple(String name, String value){
-		this.name=name;
-		this.value=value;
-	}
-	
     @XmlElement(required = true)
     protected String name;
     @XmlElement(required = true)

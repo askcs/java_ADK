@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.1
  * 
  */
-@WebServiceClient(name = "Ask", targetNamespace = "urn:com.ask-cs", wsdlLocation = "http://ask-dev.customers.luna.net/~sven/askDev/webservices/index.php?wsdl")
+@WebServiceClient(name = "Ask", targetNamespace = "urn:com.ask-cs", wsdlLocation = "http://4.ask-pers-agent.appspot.com/ask.wsdl")
 public class Ask
     extends Service
 {
@@ -30,9 +30,9 @@ public class Ask
         try {
             URL baseUrl;
             baseUrl = cs.ask.com.Ask.class.getResource(".");
-            url = new URL(baseUrl, "http://ask-dev.customers.luna.net/~sven/askDev/webservices/index.php?wsdl");
+            url = new URL(baseUrl, "http://4.ask-pers-agent.appspot.com/ask.wsdl");
         } catch (MalformedURLException e) {
-            logger.warning("Failed to create URL for the wsdl Location: 'http://ask-dev.customers.luna.net/~sven/askDev/webservices/index.php?wsdl', retrying as a local file");
+            logger.warning("Failed to create URL for the wsdl Location: 'http://4.ask-pers-agent.appspot.com/ask.wsdl', retrying as a local file");
             logger.warning(e.getMessage());
         }
         ASK_WSDL_LOCATION = url;
