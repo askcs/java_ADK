@@ -8,14 +8,7 @@ import com.askcs.ADK.lib.Logger;
 import com.askcs.ADK.lib.SessionHandler;
 import com.askcs.ADK.lib.WSLib;
 
-import com.askcs.webservices.AskPortType;
-import com.askcs.webservices.BoolResponse;
-import com.askcs.webservices.ResourceDataResponse;
-import com.askcs.webservices.StringArray;
-import com.askcs.webservices.StringArrayResponse;
-import com.askcs.webservices.StringResponse;
-import com.askcs.webservices.Tuple;
-import com.askcs.webservices.TupleArray;
+import com.askcs.webservices.*;
 
 public class PersonalAgent {
 	

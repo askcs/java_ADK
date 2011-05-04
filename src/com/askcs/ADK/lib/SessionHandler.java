@@ -26,12 +26,12 @@ public class SessionHandler {
 	protected void startSession(){
 		StringResponse res = askport.startSession(this.authKey);
 		if(res.getError()==0){
-			this.sessionId=res.getResult();
+			SessionHandler.sessionId=res.getResult();
 		}		
 	}
 
 	public String getSessionId(){
-		return this.sessionId;		
+		return SessionHandler.sessionId;		
 	}
 	
 	public AskPortType getAskPort(){

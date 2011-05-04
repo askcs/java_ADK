@@ -1,10 +1,5 @@
 package com.askcs.ADK.lib;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.xml.namespace.QName;
-
 import com.askcs.webservices.Ask;
 import com.askcs.webservices.AskPortType;
 
