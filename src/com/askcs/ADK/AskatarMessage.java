@@ -23,7 +23,7 @@ public class AskatarMessage {
 		res = askport.getResourceDataByTag(sh.getSessionId(), uuid, "type", "TXT");
 		if(res.getError()==0) this.type = res.getResult().getValue(); else error=true;
 		res = askport.getResourceDataByTag(sh.getSessionId(), uuid, "beenRead", "TXT");
-		if(res.getError()==0) this.beenRead=true;
+		if(res.getError()==0 && res.getResult().getValue() != null) this.beenRead=true;
 		res = askport.getResourceDataByTag(sh.getSessionId(), uuid, "sender", "TXT");
 		if(res.getError()==0) this.sender = res.getResult().getValue(); else error=true;
 		res = askport.getResourceDataByTag(sh.getSessionId(), uuid, "prio", "TXT");
