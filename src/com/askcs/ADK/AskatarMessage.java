@@ -13,6 +13,10 @@ public class AskatarMessage {
 	protected Boolean beenRead=false;
 	protected Integer prio=0;
 	
+	public AskatarMessage(){
+		
+	}
+	
 	public AskatarMessage(String uuid, SessionHandler sh){
 		ResourceDataResponse res;
 		Boolean error=false;
@@ -42,6 +46,11 @@ public class AskatarMessage {
 		this.sender = sender;
 		this.prio = prio;
 	}
+	
+	public boolean update(){
+		
+		return false;
+	}
 
 	public String getMessageUUID() {
 		return messageUUID;
@@ -67,5 +76,27 @@ public class AskatarMessage {
 		return prio.intValue();
 	}
 
+	public void setMessageUUID(String messageUUID) {
+		this.messageUUID = messageUUID;
+	}
 
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+
+	public void setBeenRead(Boolean beenRead) {
+		this.beenRead = beenRead;
+	}
+
+	public void setPrio(Integer prio) {
+		this.prio = prio;
+	}
 }
