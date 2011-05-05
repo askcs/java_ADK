@@ -27,8 +27,10 @@ public class AskatarMessage {
 		res = askport.getResourceDataByTag(sh.getSessionId(), uuid, "sender", "TXT");
 		if(res.getError()==0) this.sender = res.getResult().getValue(); else error=true;
 		res = askport.getResourceDataByTag(sh.getSessionId(), uuid, "prio", "TXT");
-		if(res.getError()==0) this.prio = Integer.getInteger(res.getResult().getValue()); else error=true;
-		
+		try {
+			if(res.getError()==0) this.prio = new Integer(res.getResult().getValue()); else error=true;
+		} catch (NumberFormatException e) { error=true; }
+
 		if (!error) this.messageUUID = uuid;
 	}
 	
@@ -62,7 +64,7 @@ public class AskatarMessage {
 	}
 
 	public Integer getPrio() {
-		return prio;
+		return prio.intValue();
 	}
 
 
