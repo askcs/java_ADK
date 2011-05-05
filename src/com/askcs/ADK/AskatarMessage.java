@@ -1,11 +1,12 @@
 package com.askcs.ADK;
 
 import com.askcs.ADK.lib.SessionHandler;
+import com.askcs.ADK.lib.Settings;
 import com.askcs.webservices.AskPortType;
 import com.askcs.webservices.ResourceDataResponse;
 
 public class AskatarMessage {
-
+	
 	protected String messageUUID=null;
 	protected String message="";
 	protected String type="askMessage";
@@ -13,10 +14,17 @@ public class AskatarMessage {
 	protected Boolean beenRead=false;
 	protected Integer prio=0;
 	
-	public AskatarMessage(){
+	public AskatarMessage(){ //Needed for flexJson
 		
 	}
-	
+	public AskatarMessage(String messageUUID,String message, String type, String sender, Integer prio){
+		this.messageUUID = messageUUID;
+		this.message = message;
+		this.type = type;
+		this.beenRead = false;
+		this.sender = sender;
+		this.prio = prio;
+	}	
 	public AskatarMessage(String uuid, SessionHandler sh){
 		ResourceDataResponse res;
 		Boolean error=false;
@@ -38,18 +46,48 @@ public class AskatarMessage {
 		if (!error) this.messageUUID = uuid;
 	}
 	
-	public AskatarMessage(String messageUUID,String message, String type, String sender, Integer prio){
-		this.messageUUID = messageUUID;
-		this.message = message;
-		this.type = type;
-		this.beenRead = false;
-		this.sender = sender;
-		this.prio = prio;
-	}
-	
-	public boolean update(){
+	private boolean setField(SessionHandler sh, String uuid, String tag,String value){
+		ResourceDataResponse res;
+		AskPortType askport = Settings.askport;
 		
+		res = askport.getResourceDataByTag(sh.getSessionId(), uuid, tag, "TXT");
+		if(res.getError()==0){
+			return askport.setResourceData(sh.getSessionId(), res.getResult().getResUUID(), uuid, res.getResult().getName(), res.getResult().getDescription(), res.getResult().getCategory(), res.getResult().getTag(),value).isResult();
+		} else return false;
+	}
+	private boolean createField(SessionHandler sh, String uuid, String tag,String value){
+		AskPortType askport = Settings.askport;
+		if (askport.createResource(sh.getSessionId(), "", value, uuid, "field "+tag, "From appservices", "Node "+uuid, tag, value).getResult()!=null) return true;
 		return false;
+	}
+	private boolean deleteField(SessionHandler sh, String uuid, String tag){
+		AskPortType askport = Settings.askport;
+		ResourceDataResponse res;
+		res = askport.getResourceDataByTag(sh.getSessionId(), uuid, tag, "TXT");
+		if(res.getError()==0 && res.getResult().getResUUID()!=null){
+			return askport.removeResource(sh.getSessionId(), res.getResult().getResUUID()).isResult();	
+		} else {
+			return true; //already gone!
+		}
+		
+	}
+	private boolean setField(SessionHandler sh, String uuid, String tag,Boolean value){
+		if (value) return createField(sh, uuid, tag,value.toString());
+		return deleteField(sh, uuid, tag);
+	}
+	private boolean setField(SessionHandler sh, String uuid, String tag,Integer value){
+		return setField(sh, uuid,tag,value.toString());
+	}
+		
+	public boolean update(SessionHandler sh){
+		Boolean noerror=true;
+		if (noerror) noerror=setField(sh,this.messageUUID,"message",this.message);
+		if (noerror) noerror=setField(sh,this.messageUUID,"type",this.type);
+		if (noerror) noerror=setField(sh,this.messageUUID,"sender",this.sender);
+		if (noerror) noerror=setField(sh,this.messageUUID,"prio",this.prio);
+		if (noerror) noerror=setField(sh,this.messageUUID,"beenRead",this.beenRead);
+		
+		return noerror;
 	}
 
 	public String getMessageUUID() {

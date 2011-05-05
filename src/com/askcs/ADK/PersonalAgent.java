@@ -42,8 +42,7 @@ public class PersonalAgent {
 	}
 	
 	public ArrayList<AskatarMessage> getMessages(){
-		logger.log("Start collection messages");
-		
+
 		if(askatarMessagesUUID!=null) {
 			
 			StringArrayResponse resMes = askport.getNodeMembers(sh.getSessionId(), askatarMessagesUUID);
@@ -53,7 +52,6 @@ public class PersonalAgent {
 			for(String messageUUID : messages.getString()){
 				messageList.add(new AskatarMessage(messageUUID, sh));
 			}
-			logger.log("Returning "+messageList.size()+" messages");
 			return messageList;
 		} else
 			System.out.println("askatarMessagesUUID is not set!!");
@@ -98,12 +96,14 @@ public class PersonalAgent {
 				map.put("name", uuid+"_askatarMessages");
 				StringResponse res1=askport.createNode(sh.getSessionId(), "", WSLib.convertMapToTupleArray(map));
 				askatarMessagesUUID = res1.getResult();
-				System.out.println("Set askatarMessagesUUID is set to: "+askatarMessagesUUID);				
 			} else {
 				askatarMessagesUUID = res.getResult().getString().get(0);
-				System.out.println("Set askatarMessagesUUID is set to:"+askatarMessagesUUID);
 			}
 		}
+	}
+
+	public SessionHandler getSh() {
+		return sh;
 	}
 
 }
