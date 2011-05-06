@@ -57,7 +57,7 @@ public class AskatarMessage {
 	}
 	private boolean createField(SessionHandler sh, String uuid, String tag,String value){
 		AskPortType askport = Settings.askport;
-		if (askport.createResource(sh.getSessionId(), "", value, uuid, "field "+tag, "From appservices", "Node "+uuid, tag, value).getResult()!=null) return true;
+		if (askport.createResource(sh.getSessionId(), "", "TXT", uuid, "field "+tag, "From appservices", "Node "+uuid, tag, value).getResult()!=null) return true;
 		return false;
 	}
 	private boolean deleteField(SessionHandler sh, String uuid, String tag){
@@ -72,7 +72,7 @@ public class AskatarMessage {
 		
 	}
 	private boolean setField(SessionHandler sh, String uuid, String tag,Boolean value){
-		if (value) return createField(sh, uuid, tag,value.toString());
+		if (value.booleanValue()) return createField(sh, uuid, tag,value.toString());
 		return deleteField(sh, uuid, tag);
 	}
 	private boolean setField(SessionHandler sh, String uuid, String tag,Integer value){
