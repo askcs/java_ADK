@@ -36,7 +36,7 @@ public class AskatarMessage {
 		this.sh=sh;
 		this.askport=sh.getAskPort();
 	}	
-	public AskatarMessage(String uuid){
+	public AskatarMessage(String uuid, SessionHandler sh){
 		ResourceDataResponse res;
 		Boolean error=false;
 		this.sh=new SessionHandler();

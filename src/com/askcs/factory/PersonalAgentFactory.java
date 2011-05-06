@@ -60,5 +60,9 @@ public class PersonalAgentFactory {
 		
 		return null;
 	}
+	
+	public SessionHandler getSh(){
+		return this.sh;
+	}
 
 }
