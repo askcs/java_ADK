@@ -12,7 +12,7 @@ public class WSLib {
 		for(Map.Entry<String, String> e : map.entrySet()){
 			Tuple tuple = new Tuple();
 			tuple.setName(e.getKey());
-			tuple.setName(e.getValue());
+			tuple.setValue(e.getValue());
 			array.getTuple().add(tuple);
 		}
 		return array;

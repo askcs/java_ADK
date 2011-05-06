@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.askcs.ADK.lib.ErrorHandler;
 import com.askcs.ADK.lib.Logger;
 import com.askcs.ADK.lib.SessionHandler;
 import com.askcs.ADK.lib.WSLib;
@@ -16,6 +17,7 @@ public class PersonalAgent {
 	protected String name="";
 	
 	protected SessionHandler sh;
+	protected ErrorHandler err;
 	protected AskPortType askport;
 	protected Logger logger;
 	
@@ -28,6 +30,7 @@ public class PersonalAgent {
 		this.sh=sh;
 		
 		askport = sh.getAskPort();
+		err=new ErrorHandler(askport);
 		logger = new Logger();
 		
 		checkAskatarMessages();
@@ -73,37 +76,40 @@ public class PersonalAgent {
 		return false;
 	}
 	
-	public boolean addMessage(AskatarMessage message){
-		if(askatarMessagesUUID==null){
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("name", "Message");
+	public String addMessage(AskatarMessage message){
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("name", "Message");
 
-			StringResponse res=askport.createNode(sh.getSessionId(), askatarMessagesUUID, WSLib.convertMapToTupleArray(map));
-			if(res.getError()==0){
-				// TODO: add resources to the message
-				
-				return true;
+		StringResponse res=askport.createNode(sh.getSessionId(), message.getMessageUUID(), WSLib.convertMapToTupleArray(map));
+		if(res.getError()==0){
+			message.setMessageUUID(res.getResult());
+			// TODO: add resources to the message
+			if(message.insert()) {
+				askport.attachNode(sh.getSessionId(), askatarMessagesUUID, message.getMessageUUID());
+				return message.getMessageUUID();
 			}
 		}
-		return false;
+		
+		return "";
 	}
 	
 	protected void checkAskatarMessages(){
 		if(askatarMessagesUUID==null) {
 			StringArrayResponse res = askport.getNodeMembersByTag(sh.getSessionId(), uuid, "askatarMessages");
-			if(res.getError()!=0){
+			System.out.println("Number of nodes found: "+res.getResult().getString().size());
+			if((res.getError()==0 && res.getResult().getString().size()==0) || res.getError()!=0){
 				Map<String, String> map = new HashMap<String, String>();
 				map.put("name", uuid+"_askatarMessages");
 				StringResponse res1=askport.createNode(sh.getSessionId(), "", WSLib.convertMapToTupleArray(map));
+				if(res1.getError()!=0){
+					err.printErrorMessage(res1.getError(), "createNode");
+				}
 				askatarMessagesUUID = res1.getResult();
+				askport.attachNode(sh.getSessionId(), this.uuid, askatarMessagesUUID);
 			} else {
 				askatarMessagesUUID = res.getResult().getString().get(0);
 			}
 		}
-	}
-
-	public SessionHandler getSh() {
-		return sh;
 	}
 
 }

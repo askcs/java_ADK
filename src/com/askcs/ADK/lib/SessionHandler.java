@@ -14,9 +14,9 @@ public class SessionHandler {
 	
 	public SessionHandler() {
 		// TODO Auto-generated constructor stub
-		//this.authKey="b8c4c76e-75fd-102e-bf75-005056bc3799";
-		this.authKey="448a7f0a-b0d7-102e-bf75-005056bc3799";
-		
+		this.authKey="b8c4c76e-75fd-102e-bf75-005056bc3799";
+		//this.authKey="448a7f0a-b0d7-102e-bf75-005056bc3799";
+
 		askport = Settings.ask.getAskPort();
 		
 		if(sessionId=="")
