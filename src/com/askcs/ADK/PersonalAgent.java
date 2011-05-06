@@ -53,7 +53,7 @@ public class PersonalAgent {
 			
 			ArrayList<AskatarMessage> messageList = new ArrayList<AskatarMessage>();
 			for(String messageUUID : messages.getString()){
-				messageList.add(new AskatarMessage(messageUUID, sh));
+				messageList.add(new AskatarMessage(messageUUID));
 			}
 			return messageList;
 		} else
