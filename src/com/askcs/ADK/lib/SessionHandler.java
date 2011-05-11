@@ -1,40 +1,55 @@
 package com.askcs.ADK.lib;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import com.askcs.webservices.Ask;
 import com.askcs.webservices.AskPortType;
 import com.askcs.webservices.StringResponse;
+import javax.xml.namespace.QName;
 
 public class SessionHandler {
-
-	protected String wsdl="";
-	protected String authKey="";
-	
-	protected static String sessionId="";
-	
-	protected AskPortType askport;
-	
-	public SessionHandler() {
-		// TODO Auto-generated constructor stub
-		this.authKey="b8c4c76e-75fd-102e-bf75-005056bc3799";
-		//this.authKey="448a7f0a-b0d7-102e-bf75-005056bc3799";
-
-		askport = Settings.ask.getAskPort();
+	private static AskPortType askport = null;
+	private static String authKey="";
+	private static String sessionId="";
 		
-		if(sessionId=="")
-			this.startSession();
-	}
-	
-	protected void startSession(){
-		StringResponse res = askport.startSession(this.authKey);
-		if(res.getError()==0){
-			SessionHandler.sessionId=res.getResult();
-		}		
-	}
 
-	public String getSessionId(){
-		return SessionHandler.sessionId;		
+	public SessionHandler() {
+		if (SessionHandler.askport == null) return;
+		if(sessionId=="")
+			startSession();
 	}
 	
-	public AskPortType getAskPort(){
+	public SessionHandler(String endpoint, String authKey){
+		URL url = null;
+		try {
+			url = new URL(com.askcs.webservices.Ask.class.getResource("."),"http://ask-dev.customers.luna.net/~ludo/ludoDev/webservices/index.php?wsdl");
+		} catch(MalformedURLException e){
+		}
+		Ask ask=new Ask(url,new QName("urn:webservices.askcs.com", "Ask"));
+		SessionHandler.askport = ask.getAskPort();
+		if (SessionHandler.authKey != authKey || SessionHandler.sessionId != ""){
+			SessionHandler.authKey = authKey;
+			startSession();
+		}
+	}
+	
+	protected static boolean startSession(){
+		StringResponse res = askport.startSession(authKey);
+		if(res.getError()==0){
+			sessionId=res.getResult();
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static AskPortType getAskPort(){
 		return askport;
 	}
+	public static String getSessionId() {
+		return sessionId;
+	}
 }
+
+

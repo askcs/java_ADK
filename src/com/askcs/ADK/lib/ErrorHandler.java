@@ -8,10 +8,8 @@ public class ErrorHandler {
 	protected SessionHandler sh;
 	protected AskPortType askport;
 	
-	public ErrorHandler(SessionHandler sh) {
-		// TODO Auto-generated constructor stub
-		this.sh=sh;
-		askport = sh.getAskPort();
+	public ErrorHandler() {
+		askport = SessionHandler.getAskPort();
 	}
 	public ErrorHandler(AskPortType askport) {
 		this.askport = askport;
