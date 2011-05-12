@@ -15,15 +15,13 @@ public class SessionHandler {
 		
 
 	public SessionHandler() {
-		if (SessionHandler.askport == null) return;
-		if(sessionId=="")
-			startSession();
+		
 	}
 	
 	public SessionHandler(String endpoint, String authKey){
 		URL url = null;
 		try {
-			url = new URL(com.askcs.webservices.Ask.class.getResource("."),"http://ask-dev.customers.luna.net/~ludo/ludoDev/webservices/index.php?wsdl");
+			url = new URL(com.askcs.webservices.Ask.class.getResource("."),endpoint);
 		} catch(MalformedURLException e){
 		}
 		Ask ask=new Ask(url,new QName("urn:webservices.askcs.com", "Ask"));
