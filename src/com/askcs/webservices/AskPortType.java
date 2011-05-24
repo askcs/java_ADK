@@ -267,6 +267,21 @@ public interface AskPortType {
      * 
      * @param nodeUUID
      * @param sessionID
+     * @return
+     *     returns com.askcs.webservices.ResourceDataArrayResponse
+     */
+    @WebMethod(action = "urn:webservices.askcs.com#getResourcesData")
+    @WebResult(partName = "return")
+    public ResourceDataArrayResponse getResourcesData(
+        @WebParam(name = "sessionID", partName = "sessionID")
+        String sessionID,
+        @WebParam(name = "nodeUUID", partName = "nodeUUID")
+        String nodeUUID);
+
+    /**
+     * 
+     * @param nodeUUID
+     * @param sessionID
      * @param data
      * @param addrUUID
      * @param type

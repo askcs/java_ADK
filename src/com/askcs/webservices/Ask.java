@@ -30,8 +30,7 @@ public class Ask
         try {
             URL baseUrl;
             baseUrl = com.askcs.webservices.Ask.class.getResource(".");
-            //url = new URL(baseUrl, "http://ask-dev.customers.luna.net/~sven/askDev/webservices/index.php?wsdl");
-            url = new URL(baseUrl, "http://ask-dev.customers.luna.net/~ludo/ludoDev/webservices/index.php?wsdl");
+            url = new URL(baseUrl, "http://ask-dev.customers.luna.net/~sven/askDev/webservices/index.php?wsdl");
         } catch (MalformedURLException e) {
             logger.warning("Failed to create URL for the wsdl Location: 'http://ask-dev.customers.luna.net/~sven/askDev/webservices/index.php?wsdl', retrying as a local file");
             logger.warning(e.getMessage());
@@ -42,7 +41,7 @@ public class Ask
     public Ask(URL wsdlLocation, QName serviceName) {
         super(wsdlLocation, serviceName);
     }
-   
+
     public Ask() {
         super(ASK_WSDL_LOCATION, new QName("urn:webservices.askcs.com", "Ask"));
     }
