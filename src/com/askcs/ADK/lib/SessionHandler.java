@@ -19,7 +19,7 @@ public class SessionHandler {
 			if ( gHandler == null ) {
 				gHandler = new SessionHandler( endpoint, authKey );
 			} else {
-				if ( gHandler.fEndPoint != endpoint || gHandler.fAuthKey != authKey ) {
+				if ( ! gHandler.fEndPoint.equals( endpoint ) || ! gHandler.fAuthKey.equals( authKey ) ) {
 					throw new RuntimeException( "Already had a session with different params!?" );
 				}
 			}
@@ -42,7 +42,7 @@ public class SessionHandler {
 		}
 		Ask ask=new Ask(url,new QName("urn:webservices.askcs.com", "Ask"));
 		fAskPort = ask.getAskPort();
-		if (fAuthKey != authKey || fSessionId != ""){
+		if (! fAuthKey.equals( authKey ) || ! fSessionId.equals( "" ) ){
 			fEndPoint = endpoint;
 			fAuthKey = authKey;
 			startSession();
