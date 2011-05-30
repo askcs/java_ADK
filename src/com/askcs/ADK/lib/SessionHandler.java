@@ -9,44 +9,61 @@ import com.askcs.webservices.StringResponse;
 import javax.xml.namespace.QName;
 
 public class SessionHandler {
-	private static AskPortType askport = null;
-	private static String authKey="";
-	private static String sessionId="";
-		
-
-	public SessionHandler() {
-		
+	
+	static private SessionHandler gHandler;
+	static public SessionHandler getHandler() {
+		return gHandler;
+	}
+	static public SessionHandler createHandler( String endpoint, String authKey ) {
+		synchronized ( SessionHandler.class ) {
+			if ( gHandler == null ) {
+				gHandler = new SessionHandler( endpoint, authKey );
+			} else {
+				if ( gHandler.fEndPoint != endpoint || gHandler.fAuthKey != authKey ) {
+					throw new RuntimeException( "Already had a session with different params!?" );
+				}
+			}
+			return gHandler;
+		}
 	}
 	
-	public SessionHandler(String endpoint, String authKey){
+	
+	private AskPortType fAskPort = null;
+	private String fEndPoint="";
+	private String fAuthKey="";
+	private String fSessionId="";
+		
+
+	private SessionHandler(String endpoint, String authKey){
 		URL url = null;
 		try {
 			url = new URL(com.askcs.webservices.Ask.class.getResource("."),endpoint);
 		} catch(MalformedURLException e){
 		}
 		Ask ask=new Ask(url,new QName("urn:webservices.askcs.com", "Ask"));
-		SessionHandler.askport = ask.getAskPort();
-		if (SessionHandler.authKey != authKey || SessionHandler.sessionId != ""){
-			SessionHandler.authKey = authKey;
+		fAskPort = ask.getAskPort();
+		if (fAuthKey != authKey || fSessionId != ""){
+			fEndPoint = endpoint;
+			fAuthKey = authKey;
 			startSession();
 		}
 	}
 	
-	protected static boolean startSession(){
-		StringResponse res = askport.startSession(authKey);
+	protected boolean startSession(){
+		StringResponse res = fAskPort.startSession(fAuthKey);
 		if(res.getError()==0){
-			sessionId=res.getResult();
+			fSessionId=res.getResult();
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	public static AskPortType getAskPort(){
-		return askport;
+	public AskPortType getAskPort(){
+		return fAskPort;
 	}
-	public static String getSessionId() {
-		return sessionId;
+	public String getSessionId() {
+		return fSessionId;
 	}
 }
 

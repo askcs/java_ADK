@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.1
  * 
  */
-@WebServiceClient(name = "Ask", targetNamespace = "urn:webservices.askcs.com", wsdlLocation = "http://ask-dev.customers.luna.net/~sven/askDev/webservices/index.php?wsdl")
+@WebServiceClient(name = "Ask", targetNamespace = "urn:webservices.askcs.com", wsdlLocation = "http://ask-dev.customers.luna.net/~erik/trunk/webservices/index.php?wsdl")
 public class Ask
     extends Service
 {
@@ -30,9 +30,9 @@ public class Ask
         try {
             URL baseUrl;
             baseUrl = com.askcs.webservices.Ask.class.getResource(".");
-            url = new URL(baseUrl, "http://ask-dev.customers.luna.net/~sven/askDev/webservices/index.php?wsdl");
+            url = new URL(baseUrl, "http://ask-dev.customers.luna.net/~erik/trunk/webservices/index.php?wsdl");
         } catch (MalformedURLException e) {
-            logger.warning("Failed to create URL for the wsdl Location: 'http://ask-dev.customers.luna.net/~sven/askDev/webservices/index.php?wsdl', retrying as a local file");
+            logger.warning("Failed to create URL for the wsdl Location: 'http://ask-dev.customers.luna.net/~erik/trunk/webservices/index.php?wsdl', retrying as a local file");
             logger.warning(e.getMessage());
         }
         ASK_WSDL_LOCATION = url;
@@ -53,7 +53,7 @@ public class Ask
      */
     @WebEndpoint(name = "AskPort")
     public AskPortType getAskPort() {
-        return super.getPort(new QName("urn:webservices.askcs.com", "AskPort"), AskPortType.class);
+    	return super.getPort(new QName("urn:webservices.askcs.com", "AskPort"), AskPortType.class);
     }
 
     /**

@@ -9,7 +9,7 @@ public class ErrorHandler {
 	protected AskPortType askport;
 	
 	public ErrorHandler() {
-		askport = SessionHandler.getAskPort();
+		askport = SessionHandler.getHandler().getAskPort();
 	}
 	public ErrorHandler(AskPortType askport) {
 		this.askport = askport;
