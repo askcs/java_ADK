@@ -12,8 +12,7 @@ import com.askcs.webservices.AskPortType;
 import com.askcs.webservices.StringResponse;
 import javax.xml.namespace.QName;
 
-public class SessionHandler
-implements Runnable {
+public class SessionHandler {
 	
 	static private SessionHandler gHandler;
 	static public SessionHandler getHandler() {
@@ -79,7 +78,6 @@ implements Runnable {
 		
 		fRandom = new SecureRandom();
 		
-		(new Thread( this )).start();
 	}
 	
 	protected boolean startSession(){
@@ -110,18 +108,5 @@ implements Runnable {
 		fRandom.nextBytes( b);
 		return b;
 	}
-	
-	// implement Runnable -- this keeps the session alive
-	public void run() {
-		try {
-			Thread.sleep( 50*60*60 ); // 50 minutes (server ttl default 60 mins)
-		} catch ( InterruptedException x ) {
-			x.printStackTrace( System.err );
-			return;
-		}
-		startSession();
-	}
-	
+		
 }
-
-
