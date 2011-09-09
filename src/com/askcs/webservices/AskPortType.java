@@ -185,7 +185,7 @@ public interface AskPortType {
     /**
      * 
      * @param sessionID
-     * @param uuid
+     * @param memUUID
      * @param parUUID
      * @return
      *     returns com.askcs.webservices.BoolResponse
@@ -197,8 +197,8 @@ public interface AskPortType {
         String sessionID,
         @WebParam(name = "parUUID", partName = "parUUID")
         String parUUID,
-        @WebParam(name = "UUID", partName = "UUID")
-        String uuid);
+        @WebParam(name = "memUUID", partName = "memUUID")
+        String memUUID);
 
     /**
      * 
@@ -646,6 +646,138 @@ public interface AskPortType {
         String name,
         @WebParam(name = "colour", partName = "colour")
         String colour);
+
+    /**
+     * 
+     * @param sessionID
+     * @param stateUUID
+     * @return
+     *     returns com.askcs.webservices.StringArrayResponse
+     */
+    @WebMethod(action = "urn:webservices.askcs.com#getUserStateContainers")
+    @WebResult(partName = "return")
+    public StringArrayResponse getUserStateContainers(
+        @WebParam(name = "sessionID", partName = "sessionID")
+        String sessionID,
+        @WebParam(name = "stateUUID", partName = "stateUUID")
+        String stateUUID);
+
+    /**
+     * 
+     * @param sessionID
+     * @param name
+     * @param sgrUUID
+     * @return
+     *     returns com.askcs.webservices.StringResponse
+     */
+    @WebMethod(action = "urn:webservices.askcs.com#createStateGroup")
+    @WebResult(partName = "return")
+    public StringResponse createStateGroup(
+        @WebParam(name = "sessionID", partName = "sessionID")
+        String sessionID,
+        @WebParam(name = "sgrUUID", partName = "sgrUUID")
+        String sgrUUID,
+        @WebParam(name = "name", partName = "name")
+        String name);
+
+    /**
+     * 
+     * @param sessionID
+     * @param sgrUUID
+     * @return
+     *     returns com.askcs.webservices.BoolResponse
+     */
+    @WebMethod(action = "urn:webservices.askcs.com#removeStateGroup")
+    @WebResult(partName = "return")
+    public BoolResponse removeStateGroup(
+        @WebParam(name = "sessionID", partName = "sessionID")
+        String sessionID,
+        @WebParam(name = "sgrUUID", partName = "sgrUUID")
+        String sgrUUID);
+
+    /**
+     * 
+     * @param sessionID
+     * @param sgrUUID
+     * @return
+     *     returns com.askcs.webservices.StringResponse
+     */
+    @WebMethod(action = "urn:webservices.askcs.com#getStateGroupName")
+    @WebResult(partName = "return")
+    public StringResponse getStateGroupName(
+        @WebParam(name = "sessionID", partName = "sessionID")
+        String sessionID,
+        @WebParam(name = "sgrUUID", partName = "sgrUUID")
+        String sgrUUID);
+
+    /**
+     * 
+     * @param sessionID
+     * @param name
+     * @param sgrUUID
+     * @return
+     *     returns com.askcs.webservices.BoolResponse
+     */
+    @WebMethod(action = "urn:webservices.askcs.com#setStateGroupName")
+    @WebResult(partName = "return")
+    public BoolResponse setStateGroupName(
+        @WebParam(name = "sessionID", partName = "sessionID")
+        String sessionID,
+        @WebParam(name = "sgrUUID", partName = "sgrUUID")
+        String sgrUUID,
+        @WebParam(name = "name", partName = "name")
+        String name);
+
+    /**
+     * 
+     * @param sessionID
+     * @param sgrUUID
+     * @return
+     *     returns com.askcs.webservices.StringArrayResponse
+     */
+    @WebMethod(action = "urn:webservices.askcs.com#getStateGroupMembers")
+    @WebResult(partName = "return")
+    public StringArrayResponse getStateGroupMembers(
+        @WebParam(name = "sessionID", partName = "sessionID")
+        String sessionID,
+        @WebParam(name = "sgrUUID", partName = "sgrUUID")
+        String sgrUUID);
+
+    /**
+     * 
+     * @param sessionID
+     * @param stateUUID
+     * @param sgrUUID
+     * @return
+     *     returns com.askcs.webservices.BoolResponse
+     */
+    @WebMethod(action = "urn:webservices.askcs.com#attachUserState")
+    @WebResult(partName = "return")
+    public BoolResponse attachUserState(
+        @WebParam(name = "sessionID", partName = "sessionID")
+        String sessionID,
+        @WebParam(name = "sgrUUID", partName = "sgrUUID")
+        String sgrUUID,
+        @WebParam(name = "stateUUID", partName = "stateUUID")
+        String stateUUID);
+
+    /**
+     * 
+     * @param sessionID
+     * @param stateUUID
+     * @param sgrUUID
+     * @return
+     *     returns com.askcs.webservices.BoolResponse
+     */
+    @WebMethod(action = "urn:webservices.askcs.com#detachUserState")
+    @WebResult(partName = "return")
+    public BoolResponse detachUserState(
+        @WebParam(name = "sessionID", partName = "sessionID")
+        String sessionID,
+        @WebParam(name = "sgrUUID", partName = "sgrUUID")
+        String sgrUUID,
+        @WebParam(name = "stateUUID", partName = "stateUUID")
+        String stateUUID);
 
     /**
      * 

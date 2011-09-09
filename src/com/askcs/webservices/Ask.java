@@ -1,7 +1,6 @@
 
 package com.askcs.webservices;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Logger;
@@ -10,7 +9,6 @@ import javax.xml.ws.Service;
 import javax.xml.ws.WebEndpoint;
 import javax.xml.ws.WebServiceClient;
 import javax.xml.ws.WebServiceFeature;
-import javax.xml.ws.BindingProvider;
 
 
 /**
@@ -19,7 +17,7 @@ import javax.xml.ws.BindingProvider;
  * Generated source version: 2.1
  * 
  */
-@WebServiceClient(name = "Ask", targetNamespace = "urn:webservices.askcs.com", wsdlLocation = "http://ask-dev.customers.luna.net/~erik/trunk/webservices/index.php?wsdl")
+@WebServiceClient(name = "Ask", targetNamespace = "urn:webservices.askcs.com", wsdlLocation = "http://ask70.ask-cs.nl/~ask/demo_110907/webservices/?wsdl")
 public class Ask
     extends Service
 {
@@ -32,19 +30,19 @@ public class Ask
         try {
             URL baseUrl;
             baseUrl = com.askcs.webservices.Ask.class.getResource(".");
-            url = new URL(baseUrl, "http://ask-dev.customers.luna.net/~erik/trunk/webservices/index.php?wsdl");
+            url = new URL(baseUrl, "http://ask70.ask-cs.nl/~ask/demo_110907/webservices/?wsdl");
         } catch (MalformedURLException e) {
-            logger.warning("Failed to create URL for the wsdl Location: 'http://ask-dev.customers.luna.net/~erik/trunk/webservices/index.php?wsdl', retrying as a local file");
+            logger.warning("Failed to create URL for the wsdl Location: 'http://ask70.ask-cs.nl/~ask/demo_110907/webservices/?wsdl', retrying as a local file");
             logger.warning(e.getMessage());
         }
         ASK_WSDL_LOCATION = url;
     }
 
     public Ask(URL wsdlLocation, QName serviceName) {
-    	super(wsdlLocation, serviceName);
+        super(wsdlLocation, serviceName);
     }
 
-    public Ask() throws IOException {
+    public Ask() {
         super(ASK_WSDL_LOCATION, new QName("urn:webservices.askcs.com", "Ask"));
     }
 
@@ -55,10 +53,7 @@ public class Ask
      */
     @WebEndpoint(name = "AskPort")
     public AskPortType getAskPort() {
-    	AskPortType port = super.getPort(new QName("urn:webservices.askcs.com", "AskPort"), AskPortType.class);
-    	((BindingProvider)port).getRequestContext().put("com.sun.xml.ws.connect.timeout",10000);
-    	((BindingProvider)port).getRequestContext().put("com.sun.xml.ws.request.timeout",10000);
-    	return port;
+        return super.getPort(new QName("urn:webservices.askcs.com", "AskPort"), AskPortType.class);
     }
 
     /**
