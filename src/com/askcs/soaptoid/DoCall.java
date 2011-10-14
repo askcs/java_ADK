@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="sessionID" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="iSessionID" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="question" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -31,39 +31,39 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "sessionID",
+    "iSessionID",
     "question"
 })
 @XmlRootElement(name = "doCall", namespace = "urn:soaptoid")
 public class DoCall {
 
-    @XmlElementRef(name = "sessionID", namespace = "urn:soaptoid", type = JAXBElement.class)
-    protected JAXBElement<java.lang.Integer> sessionID;
+    @XmlElementRef(name = "iSessionID", namespace = "urn:soaptoid", type = JAXBElement.class)
+    protected JAXBElement<java.lang.Integer> iSessionID;
     @XmlElementRef(name = "question", namespace = "urn:soaptoid", type = JAXBElement.class)
     protected JAXBElement<java.lang.String> question;
 
     /**
-     * Gets the value of the sessionID property.
+     * Gets the value of the iSessionID property.
      * 
      * @return
      *     possible object is
      *     {@link JAXBElement }{@code <}{@link java.lang.Integer }{@code >}
      *     
      */
-    public JAXBElement<java.lang.Integer> getSessionID() {
-        return sessionID;
+    public JAXBElement<java.lang.Integer> getISessionID() {
+        return iSessionID;
     }
 
     /**
-     * Sets the value of the sessionID property.
+     * Sets the value of the iSessionID property.
      * 
      * @param value
      *     allowed object is
      *     {@link JAXBElement }{@code <}{@link java.lang.Integer }{@code >}
      *     
      */
-    public void setSessionID(JAXBElement<java.lang.Integer> value) {
-        this.sessionID = ((JAXBElement<java.lang.Integer> ) value);
+    public void setISessionID(JAXBElement<java.lang.Integer> value) {
+        this.iSessionID = ((JAXBElement<java.lang.Integer> ) value);
     }
 
     /**

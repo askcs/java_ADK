@@ -26,8 +26,8 @@ public interface SoaptoidPortType {
     /**
      * Service definition of function ns1__doCall
      * 
-     * @param sessionID
-     * @param sessionID0
+     * @param oSessionID
+     * @param iSessionID
      * @param answer
      * @param question
      */
@@ -35,12 +35,12 @@ public interface SoaptoidPortType {
     @RequestWrapper(localName = "doCall", targetNamespace = "urn:soaptoid", className = "com.askcs.soaptoid.DoCall")
     @ResponseWrapper(localName = "doCallResponse", targetNamespace = "urn:soaptoid", className = "com.askcs.soaptoid.DoCallResponse")
     public void doCall(
-        @WebParam(name = "sessionID", targetNamespace = "urn:soaptoid")
-        java.lang.Integer sessionID,
+        @WebParam(name = "iSessionID", targetNamespace = "urn:soaptoid")
+        java.lang.Integer iSessionID,
         @WebParam(name = "question", targetNamespace = "urn:soaptoid")
         java.lang.String question,
-        @WebParam(name = "sessionID", targetNamespace = "urn:soaptoid", mode = WebParam.Mode.OUT)
-        Holder<java.lang.Integer> sessionID0,
+        @WebParam(name = "oSessionID", targetNamespace = "urn:soaptoid", mode = WebParam.Mode.OUT)
+        Holder<java.lang.Integer> oSessionID,
         @WebParam(name = "answer", targetNamespace = "urn:soaptoid", mode = WebParam.Mode.OUT)
         Holder<java.lang.String> answer);
 

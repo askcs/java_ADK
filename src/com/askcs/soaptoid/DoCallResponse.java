@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="sessionID" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="oSessionID" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="answer" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -32,31 +32,31 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "sessionID",
+    "oSessionID",
     "answer"
 })
 @XmlRootElement(name = "doCallResponse", namespace = "urn:soaptoid")
 public class DoCallResponse {
 
     @XmlElement(namespace = "urn:soaptoid")
-    protected int sessionID;
+    protected int oSessionID;
     @XmlElementRef(name = "answer", namespace = "urn:soaptoid", type = JAXBElement.class)
     protected JAXBElement<java.lang.String> answer;
 
     /**
-     * Gets the value of the sessionID property.
+     * Gets the value of the oSessionID property.
      * 
      */
-    public int getSessionID() {
-        return sessionID;
+    public int getOSessionID() {
+        return oSessionID;
     }
 
     /**
-     * Sets the value of the sessionID property.
+     * Sets the value of the oSessionID property.
      * 
      */
-    public void setSessionID(int value) {
-        this.sessionID = value;
+    public void setOSessionID(int value) {
+        this.oSessionID = value;
     }
 
     /**
