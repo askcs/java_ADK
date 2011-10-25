@@ -9,6 +9,7 @@ import java.security.SecureRandom;
 
 import com.askcs.webservices.Ask;
 import com.askcs.webservices.AskPortType;
+import com.askcs.webservices.ReconnectingAskPort;
 import com.askcs.webservices.StringResponse;
 import javax.xml.namespace.QName;
 
@@ -58,7 +59,7 @@ public class SessionHandler {
 		} catch(MalformedURLException e){
 		}
 		Ask ask=new Ask(url,new QName("urn:webservices.askcs.com", "Ask"));
-		fAskPort = ask.getAskPort();
+		fAskPort = new ReconnectingAskPort(ask.getAskPort());
 		if (! fAuthKey.equals( authKey ) || ! fSessionId.equals( "" ) ){
 			fEndPoint = endpoint;
 			fAuthKey = authKey;
