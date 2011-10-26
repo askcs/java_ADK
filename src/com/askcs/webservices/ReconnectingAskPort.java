@@ -27,10 +27,6 @@ public class ReconnectingAskPort implements AskPortType {
 		return askPort.getErrorMessage(error, service);
 	}
 	
-	interface AskReturn{
-		int getError();
-	}
-
 	private Method getMethod(String methodName) throws NoSuchMethodException{
 		for (Method method:methods){
 			if (method.getName() == methodName) return method;
