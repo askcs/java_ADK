@@ -1,5 +1,8 @@
 package com.askcs.ADK.lib;
 
+ class ErrorHandler {}
+
+/*
 import com.askcs.webservices.AskPortType;
 import com.askcs.webservices.StringResponse;
 
@@ -27,3 +30,4 @@ public class ErrorHandler {
 		System.err.println(message + " " + error + " (" + errorId + ")");
 	}
 }
+*/

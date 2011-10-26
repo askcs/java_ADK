@@ -15,33 +15,6 @@ import javax.xml.namespace.QName;
 
 public class SessionHandler {
 	
-	static private SessionHandler gHandler;
-	static public SessionHandler getHandler() {
-		return gHandler;
-	}
-	static public SessionHandler createHandler( String endpoint, String authKey ) {
-		synchronized ( SessionHandler.class ) {
-			if ( gHandler == null ) {
-				gHandler = new SessionHandler( endpoint, authKey );
-			} else {
-				if ( ! gHandler.fEndPoint.equals( endpoint ) || ! gHandler.fAuthKey.equals( authKey ) ) {
-					throw new RuntimeException( "Already had a session with different params!?" );
-				}
-			}
-			return gHandler;
-		}
-	}
-	
-	static public final String bytesToHex( byte[] src ) {
-		BigInteger i = new BigInteger( 1, src );
-	    String s = i.toString( 16 );
-	    if ( (s.length() & 1) != 0 ) {
-	        s = "0" + s;
-	    }
-	    return s;
-	}
-	
-	
 	private AskPortType fAskPort = null;
 	private String fEndPoint="";
 	private String fAuthKey="";
@@ -49,10 +22,16 @@ public class SessionHandler {
 	
 	private MessageDigest fDigest;
 	private SecureRandom fRandom;
-	
-		
 
-	private SessionHandler(String endpoint, String authKey){
+	/*
+	static private SessionHandler gHandler;
+	static public SessionHandler getHandler() {
+		return gHandler;
+	}
+	*/
+	
+	synchronized boolean connect( String endpoint, String authKey )
+	{
 		URL url = null;
 		try {
 			url = new URL(com.askcs.webservices.Ask.class.getResource("."),endpoint);
@@ -79,7 +58,31 @@ public class SessionHandler {
 		
 		fRandom = new SecureRandom();
 		
+		return true;
 	}
+	
+	public SessionHandler(String endpoint, String authKey)
+	{
+		 synchronized ( SessionHandler.class ) {
+			if ( fAskPort == null ) {
+				connect(endpoint,authKey);
+			} else {
+				if ( ! fEndPoint.equals( endpoint ) || ! fAuthKey.equals( authKey ) ) {
+					throw new RuntimeException( "Already had a session with different params!?" );
+				}
+			}
+		}
+	}
+	
+	static public final String bytesToHex( byte[] src ) {
+		BigInteger i = new BigInteger( 1, src );
+	    String s = i.toString( 16 );
+	    if ( (s.length() & 1) != 0 ) {
+	        s = "0" + s;
+	    }
+	    return s;
+	}
+	
 	
 	protected boolean startSession(){
 		StringResponse res = fAskPort.startSession(fAuthKey);
@@ -109,5 +112,18 @@ public class SessionHandler {
 		fRandom.nextBytes( b);
 		return b;
 	}
-		
+
+	
+	public void printErrorMessage(int errorId, String functionName){
+		StringResponse res = fAskPort.getErrorMessage(errorId, functionName);
+		String error = res.getResult();
+		System.err.println(error + " (" + errorId + ")");
+	}
+	
+	public void printErrorMessage(int errorId, String functionName, String message){
+		StringResponse res = fAskPort.getErrorMessage(errorId, functionName);
+		String error = res.getResult();
+		System.err.println(message + " " + error + " (" + errorId + ")");
+	}
+	
 }
