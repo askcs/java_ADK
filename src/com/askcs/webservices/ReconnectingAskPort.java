@@ -40,6 +40,7 @@ public class ReconnectingAskPort implements AskPortType {
 	}
 	
 	public Object wrapper(int count, String methodName, Object... arguments){
+		count++;
 		if (count > 5){
 			System.out.println("Giving up after many tries!");
 			return null;
@@ -60,8 +61,8 @@ public class ReconnectingAskPort implements AskPortType {
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
 			if (e.getCause().getCause().getClass().getName().equals("java.net.SocketTimeoutException")){
-				System.out.println("Timeout, re-trying "+count);
-				return wrapper(count++,methodName,arguments);
+				System.out.println("Timeout, re-trying:"+count);
+				return wrapper(count,methodName,arguments);
 			} else {
 				e.printStackTrace();
 			}
