@@ -15,10 +15,9 @@ import javax.xml.namespace.QName;
 
 public class SessionHandler {
 	
-	private AskPortType fAskPort = null;
+	private ReconnectingAskPort fAskPort = null;
 	private String fEndPoint="";
 	private String fAuthKey="";
-	private String fSessionId="";
 	
 	private MessageDigest fDigest;
 	private SecureRandom fRandom;
@@ -39,7 +38,7 @@ public class SessionHandler {
 		}
 		Ask ask=new Ask(url,new QName("urn:webservices.askcs.com", "Ask"));
 		fAskPort = new ReconnectingAskPort(ask.getAskPort());
-		if (! fAuthKey.equals( authKey ) || ! fSessionId.equals( "" ) ){
+		if (! fAuthKey.equals( authKey )){
 			fEndPoint = endpoint;
 			fAuthKey = authKey;
 			startSession();
@@ -87,7 +86,6 @@ public class SessionHandler {
 	protected boolean startSession(){
 		StringResponse res = fAskPort.startSession(fAuthKey);
 		if(res.getError()==0){
-			fSessionId=res.getResult();
 			return true;
 		} else {
 			return false;
@@ -99,7 +97,7 @@ public class SessionHandler {
 	}
 	
 	public String getSessionId() {
-		return fSessionId;
+		return fAskPort.getSessionKey();
 	}
 	
 	public byte[] getDigest( byte[] src ) {

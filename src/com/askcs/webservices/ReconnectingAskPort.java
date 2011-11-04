@@ -7,6 +7,7 @@ public class ReconnectingAskPort implements AskPortType {
 
 	private AskPortType askPort;
 	private String authKey="";
+	private String sessionKey="";
 	private Method[] methods = AskPortType.class.getMethods();
 	
 	public ReconnectingAskPort(AskPortType askPort){
@@ -16,12 +17,19 @@ public class ReconnectingAskPort implements AskPortType {
 	@Override
 	public StringResponse startSession(String authKey) {
 		this.authKey=authKey;
-		return askPort.startSession(authKey);
-	}
-	public StringResponse startSession() {
-		return askPort.startSession(this.authKey);
+		return this.startSession();
 	}
 
+	public synchronized StringResponse startSession() {
+		StringResponse result=askPort.startSession(this.authKey);
+		if (result.getError() == 0) this.sessionKey=result.getResult();
+		return result;
+	}
+
+	public String getSessionKey(){
+		return this.sessionKey;
+	}
+	
 	@Override
 	public StringResponse getErrorMessage(int error, String service) {
 		return askPort.getErrorMessage(error, service);
@@ -42,16 +50,33 @@ public class ReconnectingAskPort implements AskPortType {
 	public Object wrapper(int count, String methodName, Object... arguments){
 		count++;
 		if (count > 5){
-			System.out.println("Giving up after many tries!");
+			System.out.println("Error: Giving up after many tries!");
 			return null;
 		}
+		if (this.authKey.equals("")){
+			System.out.println("Error: Trying to use askPort before initializing the authkey!");
+			return null;
+		}
+		if (this.sessionKey.equals("")) this.startSession();
+		
 		Object result=null;
 		try {
 			Method method = getMethod(methodName);
+
+			String oldSessionKey=this.sessionKey;
+			arguments[0]=this.sessionKey;
+			
 			Object res =  method.invoke(askPort, arguments);
-			Method error = res.getClass().getMethod("getError");
-			if ( (Integer)error.invoke(res) == 101){
-				this.startSession();
+			int sessionCount=0;
+			while ( (Integer)res.getClass().getMethod("getError").invoke(res) == 101){
+				sessionCount++;
+				if (sessionCount > 5){
+					System.out.println("Session reconnecting failed, giving up.");
+					return res;
+				}
+				System.out.println("Session gone, reconnecting:"+sessionCount);
+				if (this.sessionKey.equals(oldSessionKey)) this.startSession();
+				arguments[0]=this.sessionKey;
 				res = method.invoke(askPort, arguments);
 			}
 			return res;
