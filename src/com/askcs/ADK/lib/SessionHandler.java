@@ -31,17 +31,26 @@ public class SessionHandler {
 	
 	synchronized boolean connect( String endpoint, String authKey )
 	{
-		URL url = null;
-		try {
-			url = new URL(com.askcs.webservices.Ask.class.getResource("."),endpoint);
-		} catch(MalformedURLException e){
-		}
-		Ask ask=new Ask(url,new QName("urn:webservices.askcs.com", "Ask"));
-		fAskPort = new ReconnectingAskPort(ask.getAskPort());
-		if (! fAuthKey.equals( authKey )){
-			fEndPoint = endpoint;
+		if( !fAuthKey.equals(authKey) )
+		{
+			//create webservice interface
+			URL url = null;
+			try {
+				url = new URL(com.askcs.webservices.Ask.class.getResource("."),endpoint);
+			} catch(MalformedURLException e){}
+			Ask ask=new Ask(url,new QName("urn:webservices.askcs.com", "Ask"));	//fetches wsdl
+			fAskPort = new ReconnectingAskPort(ask.getAskPort());
+			
+			//init webservice session
+			StringResponse res = fAskPort.startSession(authKey);	//fetches wsdl
+			if(res.getError()!=0)
+			{
+				System.err.println("startSession failure");
+			// 	return false;
+			}
+			
 			fAuthKey = authKey;
-			startSession();
+			fEndPoint = endpoint;
 		}
 		
 		try {
@@ -59,6 +68,7 @@ public class SessionHandler {
 		
 		return true;
 	}
+	
 	
 	public SessionHandler(String endpoint, String authKey)
 	{
@@ -82,15 +92,11 @@ public class SessionHandler {
 	    return s;
 	}
 	
-	
-	protected boolean startSession(){
-		StringResponse res = fAskPort.startSession(fAuthKey);
-		if(res.getError()==0){
-			return true;
-		} else {
-			return false;
-		}
+	/*
+	protected boolean startSession(String authKey){
+		
 	}
+	*/
 	
 	public AskPortType getAskPort(){
 		return fAskPort;
