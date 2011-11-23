@@ -19,8 +19,8 @@ public class SessionHandler {
 	private String fEndPoint="";
 	private String fAuthKey="";
 	
-	private MessageDigest fDigest;
-	private SecureRandom fRandom;
+	private static MessageDigest fDigest;
+	private final static SecureRandom fRandom = new SecureRandom();
 
 	/*
 	static private SessionHandler gHandler;
@@ -28,6 +28,23 @@ public class SessionHandler {
 		return gHandler;
 	}
 	*/
+
+	//run at first class instantiation
+	static
+	{
+		try {
+			fDigest = MessageDigest.getInstance( "SHA-256" );
+			System.out.println("using SHA-256");
+		} catch ( NoSuchAlgorithmException x ) {
+			try {
+				fDigest = MessageDigest.getInstance( "MD5" );
+				System.out.println( "No SHA256 algo available, falling back on MD5(!)" );
+			} catch ( NoSuchAlgorithmException xx ) {
+				throw new RuntimeException( "Neither SHA256 nor MD5 algo available" );
+			}
+		}
+	}
+	
 	
 	synchronized boolean connect( String endpoint, String authKey )
 	{
@@ -52,19 +69,6 @@ public class SessionHandler {
 			fAuthKey = authKey;
 			fEndPoint = endpoint;
 		}
-		
-		try {
-			fDigest = MessageDigest.getInstance( "SHA-256" );
-		} catch ( NoSuchAlgorithmException x ) {
-			try {
-				fDigest = MessageDigest.getInstance( "MD5" );
-				System.out.println( "No SHA256 algo available, falling back on MD5(!)" );
-			} catch ( NoSuchAlgorithmException xx ) {
-				throw new RuntimeException( "Neither SHA256 nor MD5 algo available" );
-			}
-		}
-		
-		fRandom = new SecureRandom();
 		
 		return true;
 	}
@@ -106,12 +110,12 @@ public class SessionHandler {
 		return fAskPort.getSessionKey();
 	}
 	
-	public byte[] getDigest( byte[] src ) {
+	public static byte[] getDigest( byte[] src ) {
 		fDigest.reset();
 		return fDigest.digest( src );
 	}
 	
-	public byte[] getRandom( int len ) {
+	public static byte[] getRandom( int len ) {
 		byte[] b = new byte[ len ];
 		fRandom.nextBytes( b);
 		return b;
