@@ -1,5 +1,6 @@
 package com.askcs.ADK.lib;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.askcs.webservices.Tuple;
@@ -16,5 +17,15 @@ public class WSLib {
 			array.getTuple().add(tuple);
 		}
 		return array;
+	}
+	
+	public static Map<String, String> convertTupleArrayToMap(TupleArray tArray) {
+		HashMap<String, String> data = new HashMap<String, String>();
+		for (Tuple t : tArray.getTuple()) {
+			String name	=	t.getName();
+			String value = t.getValue();
+			data.put(name, value);
+		}
+		return data;
 	}
 }
