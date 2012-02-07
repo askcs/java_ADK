@@ -59,10 +59,20 @@ public class SessionHandler {
 			fAskPort = new ReconnectingAskPort(ask.getAskPort());
 			
 			//init webservice session
-			StringResponse res = fAskPort.startSession(authKey);	//fetches wsdl
-			if(res.getError()!=0)
+			StringResponse res = null;
+			try
 			{
-				System.err.println("startSession failure");
+				res = fAskPort.startSession(authKey);	//also fetches wsdl
+			}
+			catch(Exception e)
+			{
+				System.err.println( e.toString() );
+				System.out.println("startSession(..) failure (wsdl changed? "+endpoint+")" );
+			}
+			
+			if( res.getError()!=0)
+			{
+				System.out.println("startSession() DISALLOWED");
 			// 	return false;
 			}
 			
