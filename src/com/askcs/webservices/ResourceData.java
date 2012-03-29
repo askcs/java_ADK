@@ -53,7 +53,7 @@ public class ResourceData {
     protected String category;
     @XmlElement(required = true)
     protected String tag;
-    @XmlElement(required = true)
+    @XmlElement(required = true, nillable = true)
     protected String value;
 
     /**

@@ -35,7 +35,7 @@ public class Tuple {
 
     @XmlElement(required = true)
     protected String name;
-    @XmlElement(required = true)
+    @XmlElement(required = true, nillable = true)
     protected String value;
 
     /**
