@@ -1417,5 +1417,22 @@ public interface AskPortType {
         String boxUUID,
         @WebParam(name = "type", partName = "type")
         String type);
-
+    
+    /**
+     * 
+     * @param nodeUUID
+     * @param sessionID
+     * @param data
+     * @return
+     *     returns com.askcs.webservices.StringResponse
+     */
+    @WebMethod(action = "urn:webservices.askcs.com#createQuestion")
+    @WebResult(partName = "return")
+    public StringResponse createQuestion(
+        @WebParam(name = "sessionID", partName = "sessionID")
+        String sessionID,
+        @WebParam(name = "nodeUUID", partName = "nodeUUID")
+        String nodeUUID,
+        @WebParam(name = "data", partName = "data")
+        TupleArray data);
 }

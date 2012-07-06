@@ -506,5 +506,10 @@ public class ReconnectingAskPort implements AskPortType {
 			String toUUID, String boxUUID, String type) {
 		return (BoolResponse) wrapper("triggerRequest",sessionID,fromUUID,toUUID,boxUUID,type);
 	}
-
+	
+	@Override
+	public StringResponse createQuestion(String sessionID, String nodeUUID,
+			TupleArray data) {
+		return (StringResponse) wrapper("createQuestion",sessionID,nodeUUID,data);
+	}
 }
