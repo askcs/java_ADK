@@ -30,59 +30,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link TupleArrayResponse }
+     * Create an instance of {@link SlotDataArray }
      * 
      */
-    public TupleArrayResponse createTupleArrayResponse() {
-        return new TupleArrayResponse();
-    }
-
-    /**
-     * Create an instance of {@link JobData }
-     * 
-     */
-    public JobData createJobData() {
-        return new JobData();
-    }
-
-    /**
-     * Create an instance of {@link StateData }
-     * 
-     */
-    public StateData createStateData() {
-        return new StateData();
-    }
-
-    /**
-     * Create an instance of {@link BoolResponse }
-     * 
-     */
-    public BoolResponse createBoolResponse() {
-        return new BoolResponse();
-    }
-
-    /**
-     * Create an instance of {@link StateDataResponse }
-     * 
-     */
-    public StateDataResponse createStateDataResponse() {
-        return new StateDataResponse();
-    }
-
-    /**
-     * Create an instance of {@link LabelArrayResponse }
-     * 
-     */
-    public LabelArrayResponse createLabelArrayResponse() {
-        return new LabelArrayResponse();
-    }
-
-    /**
-     * Create an instance of {@link ResourceDataArray }
-     * 
-     */
-    public ResourceDataArray createResourceDataArray() {
-        return new ResourceDataArray();
+    public SlotDataArray createSlotDataArray() {
+        return new SlotDataArray();
     }
 
     /**
@@ -94,59 +46,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link IdArrayResponse }
+     * Create an instance of {@link SlotDataArrayResponse }
      * 
      */
-    public IdArrayResponse createIdArrayResponse() {
-        return new IdArrayResponse();
-    }
-
-    /**
-     * Create an instance of {@link StringResponse }
-     * 
-     */
-    public StringResponse createStringResponse() {
-        return new StringResponse();
-    }
-
-    /**
-     * Create an instance of {@link Label }
-     * 
-     */
-    public Label createLabel() {
-        return new Label();
-    }
-
-    /**
-     * Create an instance of {@link Transition }
-     * 
-     */
-    public Transition createTransition() {
-        return new Transition();
-    }
-
-    /**
-     * Create an instance of {@link TransitionResponse }
-     * 
-     */
-    public TransitionResponse createTransitionResponse() {
-        return new TransitionResponse();
-    }
-
-    /**
-     * Create an instance of {@link ServiceData }
-     * 
-     */
-    public ServiceData createServiceData() {
-        return new ServiceData();
-    }
-
-    /**
-     * Create an instance of {@link SlotDataArray }
-     * 
-     */
-    public SlotDataArray createSlotDataArray() {
-        return new SlotDataArray();
+    public SlotDataArrayResponse createSlotDataArrayResponse() {
+        return new SlotDataArrayResponse();
     }
 
     /**
@@ -158,35 +62,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Tuple }
+     * 
+     */
+    public Tuple createTuple() {
+        return new Tuple();
+    }
+
+    /**
      * Create an instance of {@link ResourceDataArrayResponse }
      * 
      */
     public ResourceDataArrayResponse createResourceDataArrayResponse() {
         return new ResourceDataArrayResponse();
-    }
-
-    /**
-     * Create an instance of {@link SlotDataArrayResponse }
-     * 
-     */
-    public SlotDataArrayResponse createSlotDataArrayResponse() {
-        return new SlotDataArrayResponse();
-    }
-
-    /**
-     * Create an instance of {@link IntResponse }
-     * 
-     */
-    public IntResponse createIntResponse() {
-        return new IntResponse();
-    }
-
-    /**
-     * Create an instance of {@link Id }
-     * 
-     */
-    public Id createId() {
-        return new Id();
     }
 
     /**
@@ -198,19 +86,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Tuple }
+     * Create an instance of {@link StringResponse }
      * 
      */
-    public Tuple createTuple() {
-        return new Tuple();
+    public StringResponse createStringResponse() {
+        return new StringResponse();
     }
 
     /**
-     * Create an instance of {@link ResourceDataResponse }
+     * Create an instance of {@link IdArray }
      * 
      */
-    public ResourceDataResponse createResourceDataResponse() {
-        return new ResourceDataResponse();
+    public IdArray createIdArray() {
+        return new IdArray();
+    }
+
+    /**
+     * Create an instance of {@link Label }
+     * 
+     */
+    public Label createLabel() {
+        return new Label();
+    }
+
+    /**
+     * Create an instance of {@link TupleArrayResponse }
+     * 
+     */
+    public TupleArrayResponse createTupleArrayResponse() {
+        return new TupleArrayResponse();
     }
 
     /**
@@ -222,27 +126,59 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Id }
+     * 
+     */
+    public Id createId() {
+        return new Id();
+    }
+
+    /**
+     * Create an instance of {@link JobData }
+     * 
+     */
+    public JobData createJobData() {
+        return new JobData();
+    }
+
+    /**
+     * Create an instance of {@link IntResponse }
+     * 
+     */
+    public IntResponse createIntResponse() {
+        return new IntResponse();
+    }
+
+    /**
+     * Create an instance of {@link IdArrayResponse }
+     * 
+     */
+    public IdArrayResponse createIdArrayResponse() {
+        return new IdArrayResponse();
+    }
+
+    /**
+     * Create an instance of {@link ServiceData }
+     * 
+     */
+    public ServiceData createServiceData() {
+        return new ServiceData();
+    }
+
+    /**
+     * Create an instance of {@link ResourceDataResponse }
+     * 
+     */
+    public ResourceDataResponse createResourceDataResponse() {
+        return new ResourceDataResponse();
+    }
+
+    /**
      * Create an instance of {@link TupleArray }
      * 
      */
     public TupleArray createTupleArray() {
         return new TupleArray();
-    }
-
-    /**
-     * Create an instance of {@link SlotData }
-     * 
-     */
-    public SlotData createSlotData() {
-        return new SlotData();
-    }
-
-    /**
-     * Create an instance of {@link IdArray }
-     * 
-     */
-    public IdArray createIdArray() {
-        return new IdArray();
     }
 
     /**
@@ -259,6 +195,70 @@ public class ObjectFactory {
      */
     public StringArray createStringArray() {
         return new StringArray();
+    }
+
+    /**
+     * Create an instance of {@link SlotData }
+     * 
+     */
+    public SlotData createSlotData() {
+        return new SlotData();
+    }
+
+    /**
+     * Create an instance of {@link Transition }
+     * 
+     */
+    public Transition createTransition() {
+        return new Transition();
+    }
+
+    /**
+     * Create an instance of {@link StateData }
+     * 
+     */
+    public StateData createStateData() {
+        return new StateData();
+    }
+
+    /**
+     * Create an instance of {@link TransitionResponse }
+     * 
+     */
+    public TransitionResponse createTransitionResponse() {
+        return new TransitionResponse();
+    }
+
+    /**
+     * Create an instance of {@link StateDataResponse }
+     * 
+     */
+    public StateDataResponse createStateDataResponse() {
+        return new StateDataResponse();
+    }
+
+    /**
+     * Create an instance of {@link ResourceDataArray }
+     * 
+     */
+    public ResourceDataArray createResourceDataArray() {
+        return new ResourceDataArray();
+    }
+
+    /**
+     * Create an instance of {@link LabelArrayResponse }
+     * 
+     */
+    public LabelArrayResponse createLabelArrayResponse() {
+        return new LabelArrayResponse();
+    }
+
+    /**
+     * Create an instance of {@link BoolResponse }
+     * 
+     */
+    public BoolResponse createBoolResponse() {
+        return new BoolResponse();
     }
 
 }

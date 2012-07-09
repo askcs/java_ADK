@@ -51,9 +51,11 @@ public class ReconnectingAskPort implements AskPortType {
 		count++;
 		if (count > 5){
 			System.out.println("Error: Giving up after many tries!");
+			return null;
 		}
 		if (this.authKey.equals("")){
 			System.out.println("Error: Trying to use askPort before initializing the authkey!");
+			return null;
 		}
 		if (this.sessionKey.equals("")) this.startSession();
 		
